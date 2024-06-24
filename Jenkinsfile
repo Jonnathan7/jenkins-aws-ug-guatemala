@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        BUCKET = "aws-web-guatemala-2"
+        BUCKET = "aws-web-deploy-jenkins"
     }
 
     stages {
@@ -41,7 +41,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                withAWS(credentials: 'aws-roxsross', region: 'us-east-1') {
+                withAWS(credentials: 'aws-justin7', region: 'us-east-1') {
                     unstash 'dist'
                     sh 'aws s3 sync dist/. s3://$BUCKET --exclude ".git/*"'
                     sh 'aws s3 ls s3://$BUCKET '
